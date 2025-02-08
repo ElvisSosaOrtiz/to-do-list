@@ -1,14 +1,15 @@
 ﻿namespace RepositoryContracts
 {
     using Entities;
+    using Shared.TaskController.Request;
     using System.Linq;
 
     public interface ITaskRepository
     {
-        void CreateTask(TaskEntity taskEntity);
-        void RemoveTask(TaskEntity taskEntity);
+        TaskEntity CreateTask(RequestOfManageTask request);
+        string RemoveTask(int taskId);
         IQueryable<TaskEntity> GetAllTasks();
         TaskEntity? GetTaskDetails(int taskId);
-        void UpdateTask(TaskEntity taskEntity);
+        TaskEntity? UpdateTask(RequestOfManageTask request);
     }
 }

@@ -5,10 +5,10 @@
 
     public interface ITaskService
     {
-        void AddNewTask(RequestOfManageTask request);
-        void DeleteTask(RequestOfManageTask request);
-        void EditTask(RequestOfManageTask request);
-        ResponseOfGetTasks.SingleTask GetTaskById(int taskId);
+        ResponseOfGetTasks.SingleTask AddNewTask(RequestOfManageTask request);
+        string DeleteTask(int taskId);
+        ResponseOfGetTasks.SingleTask? EditTask(RequestOfManageTask request);
+        ResponseOfGetTasks.SingleTask? GetTaskById(int taskId);
         ResponseOfGetTasks ListAllTasks();
     }
 }

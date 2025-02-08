@@ -44,7 +44,7 @@
             }
         }
 
-        public ResponseOfGetTasks.SingleTask GetTaskById(int taskId)
+        public ResponseOfGetTasks.SingleTask? GetTaskById(int taskId)
         {
             try
             {
@@ -52,7 +52,7 @@
                 if (task is null || task == new TaskEntity())
                 {
                     _logger.LogError("Could not find task with id {0}", taskId);
-                    return new();
+                    return null;
                 }
 
                 return new()
@@ -67,11 +67,39 @@
             catch (Exception ex)
             {
                 _logger.LogError(ex, ex.Message);
+                return null;
+            }
+        }
+
+        public ResponseOfGetTasks.SingleTask AddNewTask(RequestOfManageTask request)
+        {
+            try
+            {
+                if (IsAnyPropertyNullOrEmpty(request))
+                {
+                    _logger.LogError("One or more properties are empty");
+                    throw new ApplicationException("One or more properties are empty");
+                }
+
+                var taskEntity = _repository.CreateTask(request);
+
+                return new ResponseOfGetTasks.SingleTask
+                {
+                    TaskId = taskEntity.TaskId,
+                    Title = taskEntity.Title,
+                    Description = taskEntity.Description,
+                    DueDate = taskEntity.DueDate,
+                    IsCompleted = taskEntity.IsCompleted
+                };
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, ex.Message);
                 return new();
             }
         }
 
-        public void AddNewTask(RequestOfManageTask request)
+        public ResponseOfGetTasks.SingleTask? EditTask(RequestOfManageTask request)
         {
             try
             {
@@ -81,74 +109,35 @@
                     throw new ApplicationException("One or more properties are empty");
                 }
 
-                var taskEntity = new TaskEntity
-                {
-                    TaskId = request.TaskId,
-                    Title = request.Title,
-                    Description = request.Description,
-                    DueDate = request.DueDate,
-                    IsCompleted = request.IsCompleted
-                };
+                var taskEntity = _repository.UpdateTask(request);
+                if (taskEntity is null) return null;
 
-                _repository.CreateTask(taskEntity);
+                return new ResponseOfGetTasks.SingleTask
+                {
+                    TaskId = taskEntity.TaskId,
+                    Title = taskEntity.Title,
+                    Description = taskEntity.Description,
+                    DueDate = taskEntity.DueDate,
+                    IsCompleted = taskEntity.IsCompleted
+                };
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, ex.Message);
+                return new();
             }
         }
 
-        public void EditTask(RequestOfManageTask request)
+        public string DeleteTask(int taskId)
         {
             try
             {
-                if (IsAnyPropertyNullOrEmpty(request))
-                {
-                    _logger.LogError("One or more properties are empty");
-                    throw new ApplicationException("One or more properties are empty");
-                }
-
-                var taskEntity = new TaskEntity
-                {
-                    TaskId = request.TaskId,
-                    Title = request.Title,
-                    Description = request.Description,
-                    DueDate = request.DueDate,
-                    IsCompleted = request.IsCompleted
-                };
-
-                _repository.UpdateTask(taskEntity);
+                return _repository.RemoveTask(taskId);
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, ex.Message);
-            }
-        }
-
-        public void DeleteTask(RequestOfManageTask request)
-        {
-            try
-            {
-                if (IsAnyPropertyNullOrEmpty(request))
-                {
-                    _logger.LogError("One or more properties are empty");
-                    throw new ApplicationException("One or more properties are empty");
-                }
-
-                var taskEntity = new TaskEntity
-                {
-                    TaskId = request.TaskId,
-                    Title = request.Title,
-                    Description = request.Description,
-                    DueDate = request.DueDate,
-                    IsCompleted = request.IsCompleted
-                };
-
-                _repository.RemoveTask(taskEntity);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, ex.Message);
+                return string.Empty;
             }
         }
 

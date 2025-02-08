@@ -20,6 +20,9 @@ var builder = WebApplication.CreateBuilder(args);
                .AllowAnyMethod()
                .AllowAnyHeader();
     }));
+    builder.Services
+        .AddScoped<ITaskService, TaskService>()
+        .AddScoped<ITaskRepository, TaskRepository>();
 }
 
 

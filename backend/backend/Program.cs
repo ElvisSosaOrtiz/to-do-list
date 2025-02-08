@@ -1,5 +1,16 @@
+using DbContext;
+using Microsoft.EntityFrameworkCore;
+using Repositories;
+using RepositoryContracts;
+using ServiceContracts;
+using Services;
+
 var builder = WebApplication.CreateBuilder(args);
-{ 
+{
+    builder.Services.AddDbContext<TodoListDbContext>(options =>
+    {
+        options.UseSqlServer(builder.Configuration.GetConnectionString("TodoListConnection"), b => b.MigrationsAssembly("backend"));
+    });
     builder.Services.AddControllers();
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.AddSwaggerGen();

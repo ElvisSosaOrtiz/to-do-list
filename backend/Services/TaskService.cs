@@ -150,7 +150,7 @@
                     string? value = (string?)pi.GetValue(request);
                     if (string.IsNullOrEmpty(value))
                     {
-                        return false;
+                        return true;
                     }
                 }
             }

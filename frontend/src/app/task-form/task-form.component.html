@@ -1,0 +1,24 @@
+<div class="p-4">
+    <h2>{{pageTitle}}</h2>
+    
+    <form (submit)="saveChanges()" [formGroup]="form" class="d-flex flex-column w-25">
+        <mat-form-field appearance="outline">
+            <mat-label>Title</mat-label>
+            <input [formControl]="form.controls.title" matInput required>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Description</mat-label>
+            <input [formControl]="form.controls.description" matInput required>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Due date</mat-label>
+            <input [formControl]="form.controls.dueDate" matInput [matDatepicker]="picker" required>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <div>
+            <button type="submit" mat-flat-button>Save</button>
+            <a mat-stroked-button routerLink="/">Cancel</a>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,9 @@
+a[mat-stroked-button] {
+    margin-left: 1rem;
+    color: green;
+}
+
+button[mat-flat-button] {
+    background-color: green;
+}
+

@@ -1,0 +1,18 @@
+table {
+    background-color: transparent;
+}
+
+tr.mat-mdc-header-row {
+    background-color: green;
+    color: white;
+}
+
+tr:not(.mat-mdc-header-row):hover {
+    background: rgb(192, 255, 192);
+    cursor: pointer;
+}
+
+button[extended] {
+    background-color: green;
+    color: white;
+}

@@ -1,0 +1,3 @@
+@if (taskModel) {
+    <app-task-form pageTitle="Edit a task" [taskModel]="taskModel" (submitForm)="saveChanges($event)"></app-task-form>
+}

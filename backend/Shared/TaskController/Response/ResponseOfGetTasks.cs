@@ -4,14 +4,14 @@
     {
         public static readonly ResponseOfGetTasks Empty = new();
 
-        public IEnumerable<SingleTask> Task { get; set; } = Enumerable.Empty<SingleTask>();
+        public IEnumerable<SingleTask> Tasks { get; set; } = Enumerable.Empty<SingleTask>();
 
         public class SingleTask
         {
             public int TaskId { get; set; }
             public string Title { get; set; } = null!;
             public string Description { get; set; } = null!;
-            public DateTime DueDate { get; set; }
+            public string DueDate { get; set; } = null!;
             public bool IsCompleted { get; set; }
         }
     }

@@ -27,12 +27,12 @@
             {
                 return new()
                 {
-                    Task = _repository.GetAllTasks().Select(t => new ResponseOfGetTasks.SingleTask
+                    Tasks = _repository.GetAllTasks().Select(t => new ResponseOfGetTasks.SingleTask
                     {
                         TaskId = t.TaskId,
                         Title = t.Title,
                         Description = t.Description,
-                        DueDate = t.DueDate,
+                        DueDate = t.DueDate.ToShortDateString(),
                         IsCompleted = t.IsCompleted
                     })
                 };
@@ -60,7 +60,7 @@
                     TaskId = task.TaskId,
                     Title = task.Title,
                     Description = task.Description,
-                    DueDate = task.DueDate,
+                    DueDate = task.DueDate.ToShortDateString(),
                     IsCompleted = task.IsCompleted
                 };
             }
@@ -88,7 +88,7 @@
                     TaskId = taskEntity.TaskId,
                     Title = taskEntity.Title,
                     Description = taskEntity.Description,
-                    DueDate = taskEntity.DueDate,
+                    DueDate = taskEntity.DueDate.ToShortDateString(),
                     IsCompleted = taskEntity.IsCompleted
                 };
             }
@@ -117,7 +117,7 @@
                     TaskId = taskEntity.TaskId,
                     Title = taskEntity.Title,
                     Description = taskEntity.Description,
-                    DueDate = taskEntity.DueDate,
+                    DueDate = taskEntity.DueDate.ToShortDateString(),
                     IsCompleted = taskEntity.IsCompleted
                 };
             }

@@ -60,11 +60,12 @@ namespace IntegrationTests
             var task = (await client.GetFromJsonAsync<ResponseOfGetTasks>($"/{TaskControllerRoutes.Root}"))!.Tasks.First();
             if (task.TaskId == 0)
             {
-                await CreateNewTaskAsync(client);
+                var createResponse = await CreateNewTaskAsync(client);
+                task = await createResponse.Content.ReadFromJsonAsync<ResponseOfGetTasks.SingleTask>();
             }
             var fixture = new Fixture();
             var request = fixture.Create<RequestOfManageTask>();
-            request.TaskId = task.TaskId;
+            request.TaskId = task!.TaskId;
             var response = await client.PutAsJsonAsync($"/{TaskControllerRoutes.Root}", request);
             var matchedResponse = await response.Content.ReadFromJsonAsync<ResponseOfGetTasks.SingleTask>();
 

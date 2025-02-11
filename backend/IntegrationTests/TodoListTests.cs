@@ -58,6 +58,10 @@ namespace IntegrationTests
             var client = application.CreateClient();
 
             var task = (await client.GetFromJsonAsync<ResponseOfGetTasks>($"/{TaskControllerRoutes.Root}"))!.Tasks.First();
+            if (task.TaskId == 0)
+            {
+                await CreateNewTaskAsync(client);
+            }
             var fixture = new Fixture();
             var request = fixture.Create<RequestOfManageTask>();
             request.TaskId = task.TaskId;

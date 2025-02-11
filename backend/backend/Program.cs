@@ -7,6 +7,7 @@ using Services;
 
 var builder = WebApplication.CreateBuilder(args);
 {
+    builder.Configuration.AddUserSecrets<Program>();
     builder.Services.AddDbContext<TodoListDbContext>(options =>
     {
         options.UseSqlServer(builder.Configuration.GetConnectionString("TodoListConnection"), b => b.MigrationsAssembly("backend"));

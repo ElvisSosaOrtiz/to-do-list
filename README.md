@@ -55,3 +55,4 @@
 ![](readme-imgs/environment.png)
 
 5. Run your Angular application with the command `ng serve -o` in the terminal inside the Angular project folder, and now you can test the To-Do List project. Make sure your API project is running as well.
+6. To run the tests in Angular, use the command `ng test` in the terminal.

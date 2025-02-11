@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { HttpClientTestingModule  } from '@angular/common/http/testing'
 
 import { EditTaskComponent } from './edit-task.component';
 
@@ -8,7 +9,7 @@ describe('EditTaskComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [EditTaskComponent]
+      imports: [EditTaskComponent, HttpClientTestingModule]
     })
     .compileComponents();
 

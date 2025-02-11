@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { HttpClientTestingModule  } from '@angular/common/http/testing'
 
 import { TaskDetailsComponent } from './task-details.component';
+import { RouterModule } from '@angular/router';
 
 describe('TaskDetailsComponent', () => {
   let component: TaskDetailsComponent;
@@ -8,7 +10,7 @@ describe('TaskDetailsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TaskDetailsComponent]
+      imports: [TaskDetailsComponent, HttpClientTestingModule, RouterModule.forRoot([])]
     })
     .compileComponents();
 

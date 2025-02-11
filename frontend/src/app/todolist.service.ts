@@ -26,12 +26,10 @@ export class TodolistService {
   }
 
   public editTask(task: ITask) {
-    return this.httpClient.put(this.baseURL, task, {
-      headers: { 'Content-Type': 'application/json' }
-    })
+    return this.httpClient.put(this.baseURL, task)
   }
 
   public removeTask(taskId: number) {
-    return this.httpClient.delete(`${this.baseURL}/${taskId}`)
+    return this.httpClient.delete(`${this.baseURL}/${taskId}`, {responseType: "text"})
   }
 }

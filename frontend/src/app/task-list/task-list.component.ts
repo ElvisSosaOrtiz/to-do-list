@@ -32,8 +32,9 @@ export class TaskListComponent {
   }
 
   removeTask(taskId: number) {
-    this.todoListService.removeTask(taskId).subscribe(() => {
-      this.loadList()
+    this.todoListService.removeTask(taskId).subscribe({
+      next: () => this.loadList(),
+      error: error => console.log('Remove task failed', error)
     })
   }
 

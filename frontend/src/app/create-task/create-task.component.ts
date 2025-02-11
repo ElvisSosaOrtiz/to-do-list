@@ -15,7 +15,7 @@ export class CreateTaskComponent {
   todoListService = inject(TodolistService)
 
   saveChanges(task: ITask) {
-    if (task.title.trim() && task.description.trim() && task.dueDate.trim()) {
+    if (task.title.trim() && task.description.trim() && task.dueDate.toString().trim()) {
       this.todoListService.createTask(task).subscribe({
         next: () => this.router.navigate(['']),
         error: error => console.log('Request Failed:', error)
